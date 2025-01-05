@@ -1,0 +1,42 @@
+html, body {
+    margin: 0;
+    padding: 0;
+  } 
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div {
+    border: 1px solid black;
+}
+
+#calculator {
+    width: 35vw;
+    margin: 10rem;
+    border-radius: 5px;
+}
+
+#screen {
+    width: 31vw;
+    height: 5vh;
+    margin: 1rem;
+}
+
+#buttons {
+    display: flex;
+    flex-wrap: wrap;
+    aspect-ratio: 1/1;
+}
+
+.buttonCont {
+    flex: 1 1 22%;
+    border-radius: 5px;
+}
+
+.button {
+    width: 100%;
+    height: 100%;
+}
