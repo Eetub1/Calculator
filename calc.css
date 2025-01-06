@@ -26,6 +26,7 @@ div {
     width: 31vw;
     height: 5vh;
     margin: 1rem;
+    text-align: end;
 }
 
 #buttons {

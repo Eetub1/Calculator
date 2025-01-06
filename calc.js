@@ -116,7 +116,13 @@ function operate(operator, number1, number2) {
         result = multiply(number1, number2);
     }
     else if(operator === "/") {
-        result = divide(number1, number2);
+        if (number2 === 0) {
+            screen.textContent = "Dont you know math dumbass?";
+            return;
+        }
+        else {
+            result = divide(number1, number2);
+        }
     }
     else if(operator === "%") {
         result = modulo(number1, number2);
@@ -130,7 +136,6 @@ function clearScreen() {
 
 function screenContentSplit() {
     const splitTxt = screen.textContent.trim().split(" ");
+    console.log(splitTxt);
     operate(splitTxt[1], parseFloat(splitTxt[0]), parseFloat(splitTxt[2]));
 }
-
-//console.log(operate("%", 7, 2));
