@@ -84,50 +84,30 @@ buttonAC.addEventListener("click", clearScreen);
 
 buttonCompute.addEventListener("click", screenContentSplit);
 
-function add(number1, number2) {
-    return number1 + number2;
-}
-
-function subtract(number1, number2) {
-    return number1 - number2;
-}
-
-function multiply(number1, number2) {
-    return number1 * number2;
-}
-
-function divide(number1, number2) {
-    return number1 / number2;
-}
-
-function modulo(number1, number2) {
-    return number1 % number2;
-}
-
 function operate(operator, number1, number2) {
     let result = 0;
     if (operator === "+") {
-        result = add(number1, number2);
+        result = number1 + number2;
     }
     else if(operator === "-") {
-        result = subtract(number1, number2);
+        result = number1 - number2;
     }
     else if(operator === "x") {
-        result = multiply(number1, number2);
+        result = number1 * number2;
     }
     else if(operator === "/") {
         if (number2 === 0) {
-            screen.textContent = "Dont you know math dumbass?";
+            screen.textContent = "Divide by zero error";
             return;
         }
         else {
-            result = divide(number1, number2);
+            result = number1 / number2;
         }
     }
     else if(operator === "%") {
-        result = modulo(number1, number2);
+        result = number1 % number2;
     }
-    screen.textContent = result;
+    return result
 }
 
 function clearScreen() {
@@ -136,6 +116,11 @@ function clearScreen() {
 
 function screenContentSplit() {
     const splitTxt = screen.textContent.trim().split(" ");
-    console.log(splitTxt);
-    operate(splitTxt[1], parseFloat(splitTxt[0]), parseFloat(splitTxt[2]));
+    let j = 0;
+    while (splitTxt.length > 1) {
+        result = operate(splitTxt[j + 1], parseFloat(splitTxt[j]), parseFloat(splitTxt[j + 2]));
+        splitTxt.splice(0, 3);
+        splitTxt.unshift(result);
+    }
+    screen.textContent = result;
 }

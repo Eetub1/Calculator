@@ -1,3 +1,8 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    color: #f8fafc;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -7,26 +12,38 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    background-color: #f8fafc;
 }
 
 div {
     border: 1px solid black;
 }
 
+.info {
+    color: black;
+}
+
 #calculator {
-    width: 35vw;
+    width: 32vw;
     margin: 10rem;
-    border-radius: 5px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #030712;
 }
 
 #screen {
-    width: 31vw;
-    height: 5vh;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    width: 27vw;
+    height: 6vh;
     margin: 1rem;
-    text-align: end;
+    font-size: 2rem;
+    background-color: #030712;
+    color: #f8fafc;
 }
 
 #buttons {
@@ -43,4 +60,7 @@ div {
 .button {
     width: 100%;
     height: 100%;
+    background-color: #334155;
+    font-size: 1rem;
+    border-radius: 7px;
 }
