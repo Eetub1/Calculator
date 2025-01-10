@@ -1,126 +1,70 @@
-screen = document.getElementById("screen");
+const screen = document.getElementById("screen");
+const buttons = document.querySelectorAll("button");
 
-buttonAC = document.getElementById("buttonAC");
-buttonBS = document.getElementById("buttonBS");
-buttonModulo = document.getElementById("button%");
-buttonDivide = document.getElementById("button/");
-button1 = document.getElementById("button1");
-button2 = document.getElementById("button2");
-button3 = document.getElementById("button3");
-buttonMultiply = document.getElementById("buttonx");
-button4 = document.getElementById("button4");
-button5 = document.getElementById("button5");
-button6 = document.getElementById("button6");
-buttonSubtract = document.getElementById("button-");
-button7 = document.getElementById("button7");
-button8 = document.getElementById("button8");
-button9 = document.getElementById("button9");
-buttonAdd = document.getElementById("button+");
-button0 = document.getElementById("button0");
-buttonDot = document.getElementById("button.");
-buttonCompute = document.getElementById("button=");
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const value = button.textContent;
 
-button0.addEventListener("click", () => {
-    screen.textContent += "0"
-})
+        if (value === "AC") {
+            clearScreen();
+        } else if (value === "BS") {
+            backspace();
+        } else if (value === "=") {
+            computeScreenContent();
+        } else {
+            updateScreen(value);
+        }
+    });
+});
 
-button1.addEventListener("click", () => {
-    screen.textContent += "1"
-})
+function updateScreen(value) {
+    const operators = ["%", "/", "x", "-", "+", "."];
 
-button2.addEventListener("click", () => {
-    screen.textContent += "2"
-})
-
-button3.addEventListener("click", () => {
-    screen.textContent += "3"
-})
-
-button4.addEventListener("click", () => {
-    screen.textContent += "4"
-})
-
-button5.addEventListener("click", () => {
-    screen.textContent += "5"
-})
-
-button6.addEventListener("click", () => {
-    screen.textContent += "6"
-})
-
-button7.addEventListener("click", () => {
-    screen.textContent += "7"
-})
-
-button8.addEventListener("click", () => {
-    screen.textContent += "8"
-})
-
-button9.addEventListener("click", () => {
-    screen.textContent += "9"
-})
-
-buttonModulo.addEventListener("click", () => {
-    screen.textContent += " % "
-})
-
-buttonDivide.addEventListener("click", () => {
-    screen.textContent += " / "
-})
-
-buttonMultiply.addEventListener("click", () => {
-    screen.textContent += " x "
-})
-
-buttonSubtract.addEventListener("click", () => {
-    screen.textContent += " - "
-})
-
-buttonAdd.addEventListener("click", () => {
-    screen.textContent += " + "
-})
-
-buttonAC.addEventListener("click", clearScreen);
-
-buttonCompute.addEventListener("click", screenContentSplit);
-
-function operate(operator, number1, number2) {
-    let result = 0;
-    if (operator === "+") {
-        result = number1 + number2;
-    }
-    else if(operator === "-") {
-        result = number1 - number2;
-    }
-    else if(operator === "x") {
-        result = number1 * number2;
-    }
-    else if(operator === "/") {
-        if (number2 === 0) {
-            screen.textContent = "Divide by zero error";
+    if (operators.includes(value)) {
+        //this code checks if there is an operator already in screen.textContent
+        //and if there is, the addition of another operator will be prevented
+        // some method checks if an array element passes a test
+        if (operators.some(op => screen.textContent.includes(` ${op} `))) {
             return;
         }
-        else {
-            result = number1 / number2;
-        }
+        screen.textContent += ` ${value} `;
+    } 
+    else {
+        screen.textContent += value;
     }
-    else if(operator === "%") {
-        result = number1 % number2;
-    }
-    return result
 }
 
 function clearScreen() {
     screen.textContent = "";
 }
 
-function screenContentSplit() {
-    const splitTxt = screen.textContent.trim().split(" ");
-    let j = 0;
-    while (splitTxt.length > 1) {
-        result = operate(splitTxt[j + 1], parseFloat(splitTxt[j]), parseFloat(splitTxt[j + 2]));
-        splitTxt.splice(0, 3);
-        splitTxt.unshift(result);
+function backspace() {
+    screen.textContent = screen.textContent.trim().slice(0, -1);
+}
+
+function operate(n1, operator, n2) {
+    let result = 0;
+    switch (operator) {
+        case "+":
+            return result = n1 + n2;
+        case "-":
+            return result = n1 - n2;
+        case "x":
+            return result = n1 * n2;
+        case "/":
+            if (n2 === 0) {
+                screen.textContent = "Divide by zero error";
+                return;
+            }
+            return result = n1 / n2;
+        case "%":
+            return result = n1 % n2;
     }
+}
+
+function computeScreenContent() {
+    const splitTxt = screen.textContent.trim().split(" ");
+    result = operate(parseFloat(splitTxt[0]), splitTxt[1], parseFloat(splitTxt[2]));
     screen.textContent = result;
+    result = 0;
 }
